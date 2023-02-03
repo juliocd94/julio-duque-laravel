@@ -6,19 +6,22 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Prueba tecnica Julio Duque</title>
+    <title>Julio Duque</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   </head>
 
   <body class="text-center">
-    <nav class="navbar sticky-top bg-body-tertiary">
-        <div class="container-fluid">
-            <a href="/" class="navbar-brand">logout</a>
-        </div>
-    </nav>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <span class="navbar-text">
+        <a href="/" class="navbar-brand">logout</a>
+        <a href="/panel-administrativo" class="navbar-brand">Panel</a>
+      </span>
+    </div>
+  </nav>
     <main class="form-signin w-100 m-auto container">
-        <form method="POST">
+        <form method="POST" action="{{ route('update', ['id' => $producto->id])}}">
           @csrf
             <h1 class="h3 mb-3 fw-normal">Actualizar productos</h1>
             <div class="form-floating mt-3">
@@ -37,7 +40,7 @@
                 </select>
                 <label for="floatingInput">Impuesto</label>
             </div>
-            <button class="mt-4 w-100 btn btn-lg btn-primary" type="submit">Registrar</button>
+            <button class="mt-4 inline btn btn-lg btn-primary" type="submit">Guardar cambios</button>
         </form>
     </main>
   </body>

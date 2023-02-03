@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 191);
             $table->float('price', 8, 2);
-            $table->foreignId('taxes_id')->constrained()->nullable();
+            $table->boolean('active')->default(false);
+            $table->foreignId('taxes_id')->nullable();
             $table->timestamps();
         });
     }

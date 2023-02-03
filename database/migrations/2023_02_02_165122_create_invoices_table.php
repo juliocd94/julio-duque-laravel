@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->nullable()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->onDelete('cascade');
             $table->float('amount', 8, 2);
             $table->float('total_tax', 8, 2);
             $table->timestamps();

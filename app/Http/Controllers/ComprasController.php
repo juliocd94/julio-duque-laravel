@@ -13,7 +13,8 @@ class ComprasController extends Controller
     {
         $compras = Compras::with('user')->with('product')->get();
         $invoices = Invoice::with('client')->get();
-        return view('home')->with('compras', $compras)->with('invoices', $invoices);
+        $productos = Product::where('active', true)->get();
+        return view('home')->with('compras', $compras)->with('invoices', $invoices)->with('productos', $productos);
     }
 
     public function store(Request $request)

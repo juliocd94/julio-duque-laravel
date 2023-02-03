@@ -7,7 +7,6 @@ use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\InvoiceController;
 
 
-
 Route::get('/', function () {
     return redirect('login');
 });
@@ -20,15 +19,9 @@ Route::view('/register', 'register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/productos', [ProductoController::class, 'index']);
 Route::get('/panel-administrativo', [ComprasController::class, 'index']);
-
 Route::post('/productos', [ComprasController::class, 'store'])->name('comprar');
-
 Route::post('/productos-edit', [ProductoController::class, 'edit'])->name('edit');
-
+Route::post('/update', [ProductoController::class, 'update'])->name('update');
 Route::post('/emitir-facturas', [InvoiceController::class, 'create'])->name('emitir');
-
-
 Route::post('/mostrar-detalle', [InvoiceController::class, 'details'])->name('detalle');
-
-Route::put('/productos', [ComprasController::class, 'store'])->name('editar');
 Route::post('/productos-eliminar', [ProductoController::class, 'destroy'])->name('eliminar');

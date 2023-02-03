@@ -17,43 +17,43 @@ class ProductoController extends Controller
 
     public function index()
     {
-        $producto = Product::with('tax')->get();
+        $producto = Product::where('active', true)->with('tax')->get();
         $comprasDelUsuario = Compras::where('user_id', auth()->user()->id)->get();
         return view('products')->with('data', $producto)->with('comprasDelUsuario', $comprasDelUsuario);
     }
 
     public function store(Request $request)
     {
-        $comprasDelUsuario = Compras::where('user_id', $request->user_id)->get();
-        $producto = Product::with('tax')->get();
         $data = new Product();
         $data->name = $request->name;
         $data->price = $request->price;
         $data->taxes_id = $request->tax;
+        $data->active = true;
         $data->save();
-        return redirect('/productos')->with('data', $producto);
+        return redirect('/panel-administrativo');
     }
 
     public function update(Request $request)
     {
-        return $request;
-        $producto = new Product();
+        $data = Product::find($request->id);
         $data->name = $request->name;
         $data->price = $request->price;
         $data->taxes_id = $request->tax;
         $data->save();
-        return redirect('/productos');
+        return redirect('/panel-administrativo');
     }
 
     public function destroy(Request $request)
     {
-        $producto = Product::findOrFail($request->id)->delete();
-        return redirect('/productos');
+        $producto = Product::find($request->id);
+        $producto->active = false;
+        $producto->save();
+        return redirect('/panel-administrativo');
     }
 
     public function edit(Request $request)
     {
-        $producto = Product::findOrFail($request->id);
+        $producto = Product::find($request->id);
         $taxes = Tax::all();
         return view('/edit-product')->with('producto', $producto)->with('taxes', $taxes);
     }

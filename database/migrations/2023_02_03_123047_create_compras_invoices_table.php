@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('compras', function (Blueprint $table) {
+        Schema::create('compras_invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
-            $table->foreignId('product_id')->nullable();
-            $table->foreignId('invoice_id')->nullable();
-            $table->boolean('invoiced')->default(false);
-            $table->float('price', 8, 2);
-            $table->float('tax', 8, 2);
+            $table->foreignId('invoice_id')->constrained()->nullable();
+            $table->foreignId('compras_id')->constrained()->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compras');
+        Schema::dropIfExists('compras_invoices');
     }
 };

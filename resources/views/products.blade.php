@@ -13,7 +13,6 @@
     
     </style>
   </head>
-  
   <body class="text-center">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -26,7 +25,7 @@
 
     <div class="container mt-5">
     <div class="container">
-      <h1>{{auth()->user()->role->name}}: {{auth()->user()->name}}</h1>
+      <h4>{{auth()->user()->role->name}}: <b>{{auth()->user()->name}}</b> </h4>
     </div>
 
     <hr>

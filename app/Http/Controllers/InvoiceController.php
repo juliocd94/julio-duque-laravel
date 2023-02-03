@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\User;
 use App\Models\Compras;
+use App\Models\InvoiceCompras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,9 +20,10 @@ class InvoiceController extends Controller
     public function details(Request $request)
     {
 
-        $factura = Invoice::where('id', $request->invoice_id)->get();
+        $invoice = Invoice::find($request->invoice_id);
+        $compras = Compras::where('invoice_id', $invoice->id)->get();
 
-        // PENDIENTE REVISAR COLLECTION
+        return view('/detalle')->with('compras', $compras)->with('invoice', $invoice);
 
         $usuario = User::where('id', $factura[0]->id)->get();
 
@@ -47,38 +49,15 @@ class InvoiceController extends Controller
                     $compra->invoiced = true;
                     $compra->invoice_id = $data->id;
                     $compra->save();
+                    $data->amount = $amount;
+                    $data->total_tax = $tax;
+                    $data->save();
+                    $compra->invoice_id = $data->id;
+                    $compra->save();
                 }
-                $data->amount = $amount;
-                $data->total_tax = $tax;
-                $data->save();
             }
             return redirect('/panel-administrativo');
         }
         return redirect('/panel-administrativo');
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Invoice $invoice)
-    {
-        //
-    }
-
-    public function edit(Invoice $invoice)
-    {
-        //
-    }
-
-    public function update(Request $request, Invoice $invoice)
-    {
-        //
-    }
-
-    public function destroy(Invoice $invoice)
-    {
-        //
     }
 }
