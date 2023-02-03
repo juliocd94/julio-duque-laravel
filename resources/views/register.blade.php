@@ -67,7 +67,9 @@
                 <label for="floatingPassword">Contraseña</label>
             </div>
 
-            <button class="mt-4 w-100 btn btn-lg btn-primary" type="submit">Registrar</button>
+            <button class="mt-4 mb-3 w-100 btn btn-lg btn-primary" type="submit">Registrar</button>
+
+            <a href="/login" class="">Login</a>
         </form>
     </main>
 

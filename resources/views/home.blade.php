@@ -12,14 +12,16 @@
   </head>
   
   <body class="text-center">
-  <nav class="navbar sticky-top bg-body-tertiary">
-  <div class="container-fluid">
-    <a href="/" class="navbar-brand">logout</a>
-  </div>
-</nav>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <span class="navbar-text">
+        <a href="/" class="navbar-brand">logout</a>
+      </span>
+    </div>
+  </nav>
 
 <div>
-  <h1>Ventas</h1>
+<h1>{{auth()->user()->role->name}}: {{auth()->user()->name}}</h1>
     <table class="table">
       <thead>
         <tr>

@@ -14,29 +14,12 @@
     </style>
   </head>
   
-  <body>
+  <body class="text-center">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Inicio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <!-- <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li> -->
-        </ul>
-        <span class="navbar-text">
-          <a href="/" class="navbar-brand">logout</a>
-        </span>
-      </div>
+      <span class="navbar-text">
+        <a href="/" class="navbar-brand">logout</a>
+      </span>
     </div>
   </nav>
 
@@ -44,7 +27,6 @@
     <div class="container mt-5">
     <div class="container">
       <h1>{{auth()->user()->role->name}}: {{auth()->user()->name}}</h1>
-      <a href="/new-product" class="btn btn-success">Agregar nuevo producto</a>
     </div>
 
     <hr>
@@ -67,21 +49,40 @@
               <td>{{ $producto->price}}</td>
               <td>{{ $producto->tax->tax}}</td>
               <td>
-                <!-- <form class="d-inline" action="{{ route('comprar', ['user_id' => auth()->user()->id, 'product_id' => $producto->id, 'price' => $producto->price, 'tax' => $producto->tax ])}}" method="post">
+                <form class="d-inline" action="{{ route('comprar', ['user_id' => auth()->user()->id, 'product_id' => $producto->id, 'price' => $producto->price, 'tax' => $producto->tax ])}}" method="post">
                       @csrf
                       <button type="submit" class="btn btn-primary">Comprar</button>
-                </form> -->
-
-                <form class="d-inline" action="{{ route('edit', ['id' => $producto->id])}}" method="post">
-                      @csrf
-                      <button type="submit" class="btn btn-primary">Editar</button>
-                </form>
-                
-                <form class="d-inline" action="{{ route('eliminar', ['id' => $producto->id])}}" method="post">
-                      @csrf
-                      <button type="submit" class="btn btn-primary">Borrar</button>
                 </form>
               </td>
+              </tr>
+          @endforeach
+          </tbody>
+      </table>
+    </div>
+
+<br>
+<br>
+<br>
+
+    <div class="container">
+      <h3>Mis compras</h3>
+      <table class="table">
+          <thead>
+              <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Impuesto</th>
+              <th scope="col">¿Facturado?</th>
+              </tr>
+          </thead>
+          <tbody>
+
+          @foreach($comprasDelUsuario as $data)
+          <tr>
+              <td>{{ $data->product->name}}</td>
+              <td>{{ $data->price}}</td>
+              <td>{{ $data->tax}}%</td>
+              <td>{{ $data->invoiced}}</td>
               </tr>
           @endforeach
           </tbody>

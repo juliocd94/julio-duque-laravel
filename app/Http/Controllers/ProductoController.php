@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Compras;
 use App\Models\Tax;
 
 class ProductoController extends Controller
@@ -17,17 +18,20 @@ class ProductoController extends Controller
     public function index()
     {
         $producto = Product::with('tax')->get();
-        return view('products')->with('data', $producto);
+        $comprasDelUsuario = Compras::where('user_id', auth()->user()->id)->get();
+        return view('products')->with('data', $producto)->with('comprasDelUsuario', $comprasDelUsuario);
     }
 
     public function store(Request $request)
     {
+        $comprasDelUsuario = Compras::where('user_id', $request->user_id)->get();
+        $producto = Product::with('tax')->get();
         $data = new Product();
         $data->name = $request->name;
         $data->price = $request->price;
         $data->taxes_id = $request->tax;
         $data->save();
-        return redirect('/productos');
+        return redirect('/productos')->with('data', $producto);
     }
 
     public function update(Request $request)

@@ -20,6 +20,7 @@ Route::view('/register', 'register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/productos', [ProductoController::class, 'index']);
 Route::get('/panel-administrativo', [ComprasController::class, 'index']);
+
 Route::post('/productos', [ComprasController::class, 'store'])->name('comprar');
 
 Route::post('/productos-edit', [ProductoController::class, 'edit'])->name('edit');
