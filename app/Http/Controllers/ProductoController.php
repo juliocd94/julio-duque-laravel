@@ -9,17 +9,17 @@ use App\Models\Tax;
 
 class ProductoController extends Controller
 {
-    public function new()
-    {
-        $taxes = Tax::all();
-        return view('new-product')->with('taxes', $taxes);
-    }
-
     public function index()
     {
-        $producto = Product::where('active', true)->with('tax')->get();
-        $comprasDelUsuario = Compras::where('user_id', auth()->user()->id)->get();
-        return view('products')->with('data', $producto)->with('comprasDelUsuario', $comprasDelUsuario);
+        $producto = Product::where('active', true)
+        ->with('tax')
+        ->get();
+        $comprasDelUsuario = Compras::where('user_id', auth()->user()->id)
+        ->get();
+        
+        return view('products')
+        ->with('data', $producto)
+        ->with('comprasDelUsuario', $comprasDelUsuario);
     }
 
     public function store(Request $request)
@@ -30,7 +30,16 @@ class ProductoController extends Controller
         $data->taxes_id = $request->tax;
         $data->active = true;
         $data->save();
+
         return redirect('/panel-administrativo');
+    }
+
+    public function create()
+    {
+        $taxes = Tax::all();
+
+        return view('nuevo-producto')
+        ->with('taxes', $taxes);
     }
 
     public function update(Request $request)
@@ -40,6 +49,7 @@ class ProductoController extends Controller
         $data->price = $request->price;
         $data->taxes_id = $request->tax;
         $data->save();
+
         return redirect('/panel-administrativo');
     }
 
@@ -48,6 +58,7 @@ class ProductoController extends Controller
         $producto = Product::find($request->id);
         $producto->active = false;
         $producto->save();
+
         return redirect('/panel-administrativo');
     }
 
@@ -55,6 +66,9 @@ class ProductoController extends Controller
     {
         $producto = Product::find($request->id);
         $taxes = Tax::all();
-        return view('/edit-product')->with('producto', $producto)->with('taxes', $taxes);
+
+        return view('/editar-producto')
+        ->with('producto', $producto)
+        ->with('taxes', $taxes);
     }
 }

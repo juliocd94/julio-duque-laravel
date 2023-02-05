@@ -21,7 +21,7 @@
     </div>
   </nav>
     <main class="form-signin w-100 m-auto container">
-        <form method="POST" action="{{ route('update', ['id' => $producto->id])}}">
+        <form method="POST" action="{{ route('producto.update', ['id' => $producto->id])}}">
           @csrf
             <h1 class="h3 mb-3 fw-normal">Actualizar productos</h1>
             <div class="form-floating mt-3">

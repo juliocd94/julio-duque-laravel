@@ -37,6 +37,7 @@ class AuthController extends Controller
             return redirect('/panel-administrativo');
         }
     }
+    
     public function logout(Request $request){
         Auth::user()->tokens()->delete();
         return view('login');
