@@ -48,7 +48,8 @@
                         <td>{{ $producto->price }}</td>
                         <td>{{ $producto->tax->tax }}%</td>
                         <td>
-                            <form class="d-inline" action="{{ route('producto.edit', ['id' => $producto->id]) }}" method="post">
+                            <form class="d-inline" action="{{ route('producto.edit', ['id' => $producto->id]) }}"
+                                method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-primary btn-sm">Editar</button>
                             </form>
@@ -95,7 +96,8 @@
         <h1>Facturas</h1>
 
         <div class="text-end m-3">
-            <form class="d-inline" action="{{ route('factura.store', ['user_id' => $compra->user->id]) }}" method="post">
+            <form class="d-inline" action="{{ route('factura.store', ['user_id' => $compra->user->id]) }}"
+                method="post">
                 @csrf
                 <button type="submit" class="btn btn-warning m-3">Emitir facturas pendientes</button>
             </form>

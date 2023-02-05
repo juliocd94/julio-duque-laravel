@@ -25,7 +25,6 @@
         </div>
     </nav>
 
-
     <div class="container mt-5">
         <div class="container">
             <h4>{{ auth()->user()->role->name }}: <b>{{ auth()->user()->name }}</b> </h4>
